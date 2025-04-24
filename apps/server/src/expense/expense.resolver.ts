@@ -18,4 +18,17 @@ export class ExpenseResolver {
   ): Promise<Expense> {
     return this.expenseService.create(createExpenseInput);
   }
+
+  @Mutation(() => Expense)
+  async deleteExpense(@Args('id') id: string): Promise<Expense> {
+    return this.expenseService.delete(id);
+  }
+
+  @Mutation(() => Expense)
+  async updateExpense(
+    @Args('id') id: string,
+    @Args('updateExpenseInput') updateExpenseInput: CreateExpenseInput,
+  ): Promise<Expense> {
+    return this.expenseService.update(id, updateExpenseInput);
+  }
 }

@@ -1,0 +1,8 @@
+{
+  "name": "@expenses-tracker/shared-types",
+  "version": "0.1.0",
+  "description": "Shared types for the Expenses Tracker application.",
+  "main": "types/expenseTypes.ts",
+  "types": "types/expenseTypes.ts",
+  "private": true
+}

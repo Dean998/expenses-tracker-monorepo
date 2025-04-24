@@ -19,6 +19,8 @@ type Expense {
 
 type Mutation {
   createExpense(createExpenseInput: CreateExpenseInput!): Expense!
+  deleteExpense(id: String!): Expense!
+  updateExpense(id: String!, updateExpenseInput: CreateExpenseInput!): Expense!
 }
 
 type Query {
