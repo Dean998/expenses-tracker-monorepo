@@ -1,84 +1,75 @@
-# Turborepo starter
+# Expenses Tracker
 
-This Turborepo starter is maintained by the Turborepo core team.
+## Setup and Run the Application
 
-## Using this example
+This guide will walk you through the steps to set up and run the application locally.
 
-Run the following command:
+### Prerequisites
 
-```sh
-npx create-turbo@latest
+Before getting started, make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v14.x or higher)
+- [Yarn](https://yarnpkg.com/) (Package manager)
+- [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/)
+- A Git client (e.g., GitHub Desktop, or Git CLI)
+- create `.env` file and copy `.env.example` values as they same for development in apps/client and apps/server
+
+### 1. Clone the Repository
+
+First, clone the repository to your local machine:
+
+```bash
+git clone https://github.com/dean998/expenses-tracker-monorepo.git
+cd expenses-tracker-monorepo
 ```
 
-## What's inside?
+2. Install Dependencies
+   Install the necessary dependencies using Yarn:
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-yarn build
+```bash
+yarn
 ```
 
-### Develop
+This will install all the required dependencies for both the client and server.
 
-To develop all apps and packages, run the following command:
+3. Start Docker Containers
+   Start the required Docker containers in detached mode. The -d flag runs the containers in the background.
 
+```bash
+docker-compose up -d
 ```
-cd my-turborepo
+
+Note: The -d flag is short for detached mode, which means the containers will run in the background and won't block your terminal.
+
+4. Run the Application
+   Once the containers are up and running, start both the client and the server:
+
+```bash
 yarn dev
 ```
 
-### Remote Caching
+This command will start the development server for both the client and the backend server. You should now be able to access the application by navigating to:
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+Frontend: http://localhost:3000
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+Backend: http://localhost:8000/graphql (GraphQL API)
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+5. Stop the Docker Database Container
+   To stop the running containers, use:
 
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
+```bash
+docker-compose down
 ```
 
-## Useful Links
+This will stop and remove the containers created by docker-compose up.
 
-Learn more about the power of Turborepo:
+Troubleshooting
+If you encounter any issues with Docker, ensure Docker is running before executing docker-compose commands.
 
-- [Tasks](https://turborepo.com/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turborepo.com/docs/core-concepts/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+If you experience problems with dependencies, try removing node_modules and yarn.lock and then running yarn again:
+
+```bash
+rm -rf node_modules
+rm yarn.lock
+yarn
+```
